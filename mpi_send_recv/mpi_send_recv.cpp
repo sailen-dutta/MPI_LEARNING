@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <mpi.h>
-#include <cstdlib>
 
 int main(int argc, char** argv){
     
@@ -22,14 +21,14 @@ int main(int argc, char** argv){
         MPI_Abort(MPI_COMM_WORLD, 1);   // terminates all processes in MPI_COMM_WORLD and returns an error code of 1 to the environment.
     } 
 
-    int number;
+    double number = 0;
     if (world_rank == 0){
-    // If we are rank 0, set the number to -1 and send it to process 1
-        number = -1;
+    // If we are rank 0, set the number to a double and send it to process 1
+        number = -1.715;
         MPI_Send(
       /* data         = */ &number, 
       /* count        = */ 1, 
-      /* datatype     = */ MPI_INT, 
+      /* datatype     = */ MPI_DOUBLE, 
       /* destination  = */ 1, 
       /* tag          = */ 0, 
       /* communicator = */ MPI_COMM_WORLD);
@@ -38,7 +37,7 @@ int main(int argc, char** argv){
         MPI_Recv(
       /* data         = */ &number, 
       /* count        = */ 1, 
-      /* datatype     = */ MPI_INT, 
+      /* datatype     = */ MPI_DOUBLE, 
       /* source       = */ 0, 
       /* tag          = */ 0, 
       /* communicator = */ MPI_COMM_WORLD, 
