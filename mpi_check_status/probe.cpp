@@ -48,8 +48,8 @@ int main(int argc, char** argv){
 
         // Receive the message
         MPI_Recv(number_buf.get(), number_amount, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE); 
-        // MPI_Recv expects a raw pointer as the first argument. 
-        //Since number_buf is a std::unique_ptr<int[]>, you cannot pass it directly to MPI_Recv because MPI_Recv expects a raw pointer (void*).
+        // MPI_Recv expects a raw pointer (void*) as the first argument . 
+        //Since number_buf is a std::unique_ptr<int[]>, you cannot pass it directly to MPI_Recv.
         // The get() method is used to extract the raw pointer from the std::unique_ptr.
 
         std::cout << "Process 1 dynamically received " << number_amount << " numbers from Process 0\n";
